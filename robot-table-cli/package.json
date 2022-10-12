@@ -1,0 +1,19 @@
+{
+  "name": "robot-table-cli",
+  "version": "1.0.0",
+  "description": "Console application for a robot travelling on an n x n table.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taylahlucas/RobotTable-CLI.git"
+  },
+  "author": "Taylah Lucas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taylahlucas/RobotTable-CLI/issues"
+  },
+  "homepage": "https://github.com/taylahlucas/RobotTable-CLI#readme"
+}
