@@ -4,7 +4,7 @@ Console application for a robot travelling on an n x n table.
 # Setup
 
 npm install
-node index.ts
+ts-node index.ts
 
 # Folder Navigation
 

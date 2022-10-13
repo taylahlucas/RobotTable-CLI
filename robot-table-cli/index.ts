@@ -1,6 +1,6 @@
 #! /usr/bin/env node
-import Menu from './cli/menu'
-import GameTable from './gameTable'
+import Menu from './src/cli/menu'
+import GameTable from './src/gameTable'
 
 if (require.main === module) {
     const game = new GameTable(5);
