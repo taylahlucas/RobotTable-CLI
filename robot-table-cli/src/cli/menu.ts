@@ -1,15 +1,17 @@
 import { EventEmitter } from 'events'
-import { ValidCommands } from '../enums'
+import { ValidCommands } from '../helpers/enums'
 import console from './console'
-import getInput from './inputController'
+import inputController from './inputController'
 
 export default class Menu extends EventEmitter {
-    public title: string
-    public description: string
-    public instructions: Array<string>
-    public subtext: string
+    private title: string
+    private description: string
+    private instructions: Array<string>
+    private subtext: string
+    private callback: (command: ValidCommands) => void
 
-    constructor() {
+
+    constructor(callback: (command: ValidCommands) => void) {
         super()
         
         this.title = "\n\n\t*** Welcome to the Robot Table CLI! ***\n\n"
@@ -21,29 +23,29 @@ export default class Menu extends EventEmitter {
             "REPORT: Show the current positino of the robot.",
         ]
         this.subtext = "To display the description again, type DESCRIPTION.\nTo quit, type QUIT\n\n\n"
+        this.callback = callback
     }
 
     init() {
         console.log(this.title)
         this.printDescription()
 
-        function onCommandEntry(command: string) {
-            // TODO: Validation
-            let isValid = false
-            Object.values(ValidCommands).map((value) => {
-                if (command.includes(value)) {
-                    isValid = true
-                }
-            })
-
-            console.log("HERE: ", isValid.toString())
-
-            if (command === 'MOVE') {
-
+        // Handle user input
+        const onCommandEntry = (command: string) => {
+            let validCommand = getValidCommand(command)
+            if (validCommand) {
+                this.callback(ValidCommands[validCommand as keyof typeof ValidCommands])
+            }
+            else {
+                console.log("Invalid command. Please enter a command from the following list.\n")
             }
         }
-        // TODO: While game is still running,  onkeypress for return to reset input ?
-        getInput(onCommandEntry)
+
+        const getValidCommand = (command: string) => {
+            return Object.keys(ValidCommands).find(key => key.toString().toLowerCase() === command.toLowerCase())
+        }
+
+        inputController.on('line', onCommandEntry)
     }
 
     printDescription() {
@@ -53,16 +55,5 @@ export default class Menu extends EventEmitter {
             console.log(`\t${element}\n\n`)
         });
         console.log(this.subtext)
-    }  
-    
-    // checkValidCommand(command: String) {
-    //     // return Object.values(ValidCommands).includes([command])
-
-    //     Object.values(ValidCommands).map((value) => {
-    //         if (command.includes(value)) {
-    //             return true
-    //         }
-    //     })
-    //     return false
-    // }
+    }
 }
