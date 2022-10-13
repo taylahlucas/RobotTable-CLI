@@ -1,21 +1,21 @@
 export enum Bearing {
-    NORTH,
-    SOUTH,
-    EAST,
-    WEST
+    N = "NORTH",
+    S = "SOUTH",
+    E = "EAST",
+    W = "WEST"
 }
 
 export enum Direction {
-    LEFT,
-    RIGHT
+    L = "LEFT",
+    R = "RIGHT"
 }
 
 export enum ValidCommands {
-    // TODO: Add regex?
-    PLACE,
-    MOVE,
-    LEFT = Direction.LEFT,
-    RIGHT = Direction.RIGHT,
-    REPORT,
-    DESCRIPTION
+    P = "PLACE",
+    M = "MOVE",
+    L  = "LEFT",
+    R = "RIGHT",
+    REP = "REPORT",
+    DES = "DESCRIPTION",
+    Q = "QUIT"
 }

@@ -5,10 +5,11 @@ const rl = readline.createInterface({
     output: process.stdout
 })
 
-function inputController(callback: Function) {
+const getInput = (callback: Function) => {
     rl.question("Enter your move: ", function(move: string) {
-        callback(move)
+        return callback(move)
     })
 }
-export default inputController
+
+export default getInput
 

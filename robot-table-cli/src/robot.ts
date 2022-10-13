@@ -4,7 +4,7 @@ import GameTable from './gameTable'
 export default class Robot {
     public x: number = 0
     public y: number = 0
-    public direction: Bearing = Bearing.SOUTH
+    public direction: Bearing = Bearing.S
 
     constructor(public table: GameTable) {
         this.resetPosition()
@@ -13,7 +13,7 @@ export default class Robot {
     resetPosition() {
         this.x = 0
         this.y = 0
-        this.direction = Bearing.SOUTH
+        this.direction = Bearing.S
     }
 
     isInvalidPosition(x: number, y: number) {
@@ -22,6 +22,6 @@ export default class Robot {
     }
 
     move() {
-
+        
     }
 }
