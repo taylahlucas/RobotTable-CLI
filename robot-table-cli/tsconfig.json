@@ -7,9 +7,14 @@
     "compilerOptions": {
         "target": "es6",
         "module": "commonjs",
-        "strict": true
+        "types": ["node", "jest"],
+        "strict": true,
+        "forceConsistentCasingInFileNames": true
     },
-    "include": ["**/*"],
+    "include": [
+        "**/*",
+        "jest.config.ts"
+    ],
     "exclude": [
         "node_modules"
     ],

@@ -3,8 +3,14 @@ Console application for a robot travelling on an n x n table.
 
 # Setup
 
+cd robot-table-cli
 npm install
 ts-node index.ts
+
+# Running Tests
+
+cd robot-table-cli
+npm run test
 
 # Folder Navigation
 
@@ -20,13 +26,8 @@ ts-node index.ts
 
 - @typescript
 - @ts-node
-
 - @types/node
 
-
-// TODO: Check if these are being used
-- @commander
-- @types/commander
-
-- @inquirer
-- @types/inquirer
+- @jest
+- @ts-jest
+- @types/jest
