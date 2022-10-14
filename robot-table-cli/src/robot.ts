@@ -43,6 +43,7 @@ export default class Robot {
         if (isValid) {
             this.x = newPosition.x
             this.y = newPosition.y
+            this.bearing = bearing ?? this.bearing
         }
         else {
             console.log("Invalid position - out of bounds!")
