@@ -5,13 +5,13 @@ import { ValidCommands, Direction } from './helpers/enums'
 import { convertCommandToDirection } from './helpers/functions'
 
 export default class GameTable extends EventEmitter {
-    public tableSize: number;
-    public robot: Robot;
+    public tableSize: number
+    public robot: Robot
     
     constructor(tableSize: number) {
-        super();
+        super()
         this.tableSize = tableSize
-        this.robot = new Robot(this);
+        this.robot = new Robot(this)
     }
 
     processCommand(command: ValidCommands, args: string[]) {
