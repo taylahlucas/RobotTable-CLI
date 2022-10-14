@@ -12,22 +12,20 @@ COMMANDS: <br />
 
 # Setup
 
-cd robot-table-cli
-npm install
-ts-node index.ts
+cd robot-table-cli<br />
+npm install<br />
+ts-node index.ts<br />
 
 # Running Tests
 
-cd robot-table-cli
-npm run test
+cd robot-table-cli<br />
+npm run test<br />
 
 # Folder Navigation
 
 - /index.ts - Entry point of application
 - /src/gameTable.ts - Game board which emits events
 - /src/robot.ts - Class representing robots, its current attributes and commmand logic
-// TODO:
-- /src/logic -- seperate logc into another file??
 - /src/helpers/ - Helper classes such as enums and constants
 - /src/cli/ - Console logic and menus
 
