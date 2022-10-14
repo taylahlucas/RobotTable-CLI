@@ -1,5 +1,6 @@
 # RobotTable-CLI
 Console application for a robot travelling on an n x n table. <br />
+Built using Node.JS and TypeScript. <br />
 To play this game <br />
 Enter one of the following commands to move the robot around the 5 x 5 size table. <br />
 Don't let the robot fall off! <br />
