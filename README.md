@@ -1,5 +1,14 @@
 # RobotTable-CLI
-Console application for a robot travelling on an n x n table.
+Console application for a robot travelling on an n x n table. <br />
+To play this game <br />
+Enter one of the following commands to move the robot around the 5 x 5 size table. <br />
+Don't let the robot fall off! <br />
+
+COMMANDS: <br />
+    - PLACE X, Y, F: Place the robot in position on the table at X, Y. Facing NORTH, SOUTH, EAST or WEST, <br />
+    - MOVE: Move the robot one unit forward in the current direction, <br />
+    - LEFT/RIGHT: Rotate the robot 90 degrees either LEFT or RIGHT, <br />
+    - REPORT: Show the current positino of the robot,  <br />
 
 # Setup
 
