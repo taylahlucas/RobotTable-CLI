@@ -1,14 +1,15 @@
 import GameTable from './gameTable'
-import { Bearing } from './helpers/enums'
+import { Bearing, Direction } from './helpers/enums'
 import { directionBindings } from './helpers/constants'
+import { getNewBearingFromRotation } from './helpers/functions'
 
 export default class Robot {
     public x: number = 0
     public y: number = 0
-    public direction: Bearing = Bearing.SOUTH
+    public bearing: Bearing = Bearing.SOUTH
 
     private get directionToMove(): [number, number] {
-        return directionBindings[Bearing[this.direction]]
+        return directionBindings[Bearing[this.bearing]]
     }
 
     constructor(public table: GameTable) {
@@ -18,7 +19,7 @@ export default class Robot {
     resetPosition() {
         this.x = 0
         this.y = 0
-        this.direction = Bearing.SOUTH
+        this.bearing = Bearing.SOUTH
     }
 
     calculateNewPosition() {
@@ -43,5 +44,9 @@ export default class Robot {
         else {
             // TODO: print INVALID POSITION
         }
+    }
+
+    rotate(direction: Direction) {
+        this.bearing = getNewBearingFromRotation(direction, this.bearing)
     }
 }
