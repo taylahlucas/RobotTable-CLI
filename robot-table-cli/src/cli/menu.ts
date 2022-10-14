@@ -8,10 +8,11 @@ export default class Menu extends EventEmitter {
     private description: string
     private instructions: Array<string>
     private subtext: string
-    private callback: (command: ValidCommands) => void
+    private tableSize: number
+    private callback: (command: ValidCommands, args: string[]) => void
 
 
-    constructor(callback: (command: ValidCommands) => void) {
+    constructor(tableSize: number, callback: (command: ValidCommands, args: string[]) => void) {
         super()
         
         this.title = "\n\n\t*** Welcome to the Robot Table CLI! ***\n\n"
@@ -23,6 +24,7 @@ export default class Menu extends EventEmitter {
             "REPORT: Show the current positino of the robot.",
         ]
         this.subtext = "To display the description again, type DESCRIPTION.\nTo quit, type QUIT\n\n\n"
+        this.tableSize = tableSize
         this.callback = callback
     }
 
@@ -32,9 +34,18 @@ export default class Menu extends EventEmitter {
 
         // Handle user input
         const onCommandEntry = (command: string) => {
-            let validCommand = getValidCommand(command)
-            if (validCommand) {
-                this.callback(ValidCommands[validCommand as keyof typeof ValidCommands])
+            let { validCommand, args } = getValidCommand(command.toLowerCase())
+            if (validCommand != undefined) {
+                
+                switch (ValidCommands[validCommand as keyof typeof ValidCommands]) {
+                    case ValidCommands.DESCRIPTION:
+                        this.printDescription()
+                    case ValidCommands.QUIT:
+                        // TODO: Quit console
+                        break
+                    default:
+                        this.callback(ValidCommands[validCommand as keyof typeof ValidCommands], args)
+                }
             }
             else {
                 console.log("Invalid command. Please enter a command from the following list.\n")
@@ -42,13 +53,34 @@ export default class Menu extends EventEmitter {
         }
 
         const getValidCommand = (command: string) => {
-            return Object.keys(ValidCommands).find(key => key.toString().toLowerCase() === command.toLowerCase())
+            if (command.includes(ValidCommands[ValidCommands.PLACE].toLowerCase())) {
+                const commandString = ValidCommands[ValidCommands.PLACE].toLowerCase()
+                // Validate arguments
+                const reg = new RegExp(`${commandString} [0-${this.tableSize}], [0-${this.tableSize}], north|south|east|west`)
+                if (reg.test(command)) {
+                    return { 
+                        validCommand: Object.keys(ValidCommands).find(key => key == ValidCommands[ValidCommands.PLACE]),
+                        args: command.replace(commandString, '').split(',')
+                     }
+                }
+                else {
+                    return {
+                        validCommand: undefined,
+                        args: []
+                    }
+                }
+            }
+            return { 
+                validCommand: Object.keys(ValidCommands).find(key => command.toString().toLowerCase().includes(key.toLowerCase())),
+                args: []
+             }
         }
 
         inputController.on('line', onCommandEntry)
     }
 
     printDescription() {
+        console.log('\n\n')
         console.log(this.description)
 
         this.instructions.forEach(element => {

@@ -22,19 +22,20 @@ export default class Robot {
         this.bearing = Bearing.SOUTH
     }
 
-    calculateNewPosition() {
+    calculateNewPosition(x: number, y: number) {
         return {
-            x: this.x + this.directionToMove[0],
-            y: this.y + this.directionToMove[1]
+            x: this.x + x,
+            y: this.y + y
         }
     }
 
     isValidPosition(x: number, y: number) {
-        return x >= 0 && x < this.table.tableSize || y >= 0 && y < this.table.tableSize
+        return x >= 0 && x < this.table.tableSize && y >= 0 && y < this.table.tableSize
     }
 
-    move() {
-        let newPosition = this.calculateNewPosition()
+    // TODO: Refactor functions below
+    place(x: number, y: number, bearing: Bearing) {
+        let newPosition = this.calculateNewPosition(x, y)
         let isValid = this.isValidPosition(newPosition.x, newPosition.y)
 
         if (isValid) {
@@ -42,11 +43,30 @@ export default class Robot {
             this.y = newPosition.y
         }
         else {
-            // TODO: print INVALID POSITION
+            // TODO: Add to error message
+            console.log("Invalid position.")
+        }
+    }
+
+    move() {
+        let newPosition = this.calculateNewPosition(this.directionToMove[0], this.directionToMove[1])
+        let isValid = this.isValidPosition(newPosition.x, newPosition.y)
+
+        if (isValid) {
+            this.x = newPosition.x
+            this.y = newPosition.y
+        }
+        else {
+            // TODO: Add to error message
+            console.log("Invalid position.")
         }
     }
 
     rotate(direction: Direction) {
         this.bearing = getNewBearingFromRotation(direction, this.bearing)
+    }
+
+    report() {
+        console.log(`[${this.x}, ${this.y}], ${Bearing[this.bearing]}\n`)
     }
 }
