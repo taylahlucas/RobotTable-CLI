@@ -33,9 +33,11 @@ export default class Robot {
         return x >= 0 && x < this.table.tableSize && y >= 0 && y < this.table.tableSize
     }
 
-    // TODO: Refactor functions below
-    place(x: number, y: number, bearing: Bearing) {
-        let newPosition = this.calculateNewPosition(x, y)
+    move(x?: number, y?: number, bearing?: Bearing) {
+        let newPosition = this.calculateNewPosition(
+            x ?? this.directionToMove[0], 
+            y ?? this.directionToMove[1]
+        )
         let isValid = this.isValidPosition(newPosition.x, newPosition.y)
 
         if (isValid) {
@@ -43,22 +45,7 @@ export default class Robot {
             this.y = newPosition.y
         }
         else {
-            // TODO: Add to error message
-            console.log("Invalid position.")
-        }
-    }
-
-    move() {
-        let newPosition = this.calculateNewPosition(this.directionToMove[0], this.directionToMove[1])
-        let isValid = this.isValidPosition(newPosition.x, newPosition.y)
-
-        if (isValid) {
-            this.x = newPosition.x
-            this.y = newPosition.y
-        }
-        else {
-            // TODO: Add to error message
-            console.log("Invalid position.")
+            console.log("Invalid position - out of bounds!")
         }
     }
 

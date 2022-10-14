@@ -7,21 +7,17 @@ import { convertCommandToDirection } from './helpers/functions'
 export default class GameTable extends EventEmitter {
     public tableSize: number;
     public robot: Robot;
-    // private menuCallback: (command: ValidCommands) => void
-
-    //, callback: (command: ValidCommands) => void
+    
     constructor(tableSize: number) {
         super();
         this.tableSize = tableSize
         this.robot = new Robot(this);
-
-        // this.menuCallback = callback
     }
 
     processCommand(command: ValidCommands, args: string[]) {
         switch (command) {
             case ValidCommands.PLACE:
-                this.robot.place(
+                this.robot.move(
                     parseInt(args[0]), 
                     parseInt(args[1]), 
                     parseInt(args[2]), 
@@ -38,13 +34,7 @@ export default class GameTable extends EventEmitter {
             case ValidCommands.REPORT:
                 this.robot.report()
                 break
-
-            // TODO: Make these call backs to Menu ?
-            case ValidCommands.DESCRIPTION:
-                // TODO: Print description
-                break
-            case ValidCommands.QUIT: 
-                // TODO: Quit game
+            default:
                 break
         }
     }

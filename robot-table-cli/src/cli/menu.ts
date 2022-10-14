@@ -40,8 +40,9 @@ export default class Menu extends EventEmitter {
                 switch (ValidCommands[validCommand as keyof typeof ValidCommands]) {
                     case ValidCommands.DESCRIPTION:
                         this.printDescription()
+                        break
                     case ValidCommands.QUIT:
-                        // TODO: Quit console
+                        process.exit() 
                         break
                     default:
                         this.callback(ValidCommands[validCommand as keyof typeof ValidCommands], args)
