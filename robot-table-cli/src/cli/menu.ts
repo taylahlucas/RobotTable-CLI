@@ -1,6 +1,5 @@
 import { EventEmitter } from 'events'
 import { ValidCommands } from '../helpers/enums'
-import console from './console'
 import inputController from './inputController'
 
 export default class Menu extends EventEmitter {
