@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events'
-import { ValidCommands } from '../helpers/enums'
+import { Bearing, ValidCommands } from '../helpers/enums'
 import inputController from './inputController'
 
 export default class Menu extends EventEmitter {
@@ -33,9 +33,8 @@ export default class Menu extends EventEmitter {
 
         // Handle user input
         const onCommandEntry = (command: string) => {
-            let { validCommand, args } = getValidCommand(command.toLowerCase())
+            let { validCommand, args } = getValidCommand(command)
             if (validCommand != undefined) {
-                
                 switch (ValidCommands[validCommand as keyof typeof ValidCommands]) {
                     case ValidCommands.DESCRIPTION:
                         this.printDescription()
@@ -53,14 +52,15 @@ export default class Menu extends EventEmitter {
         }
 
         const getValidCommand = (command: string) => {
-            if (command.includes(ValidCommands[ValidCommands.PLACE].toLowerCase())) {
-                const commandString = ValidCommands[ValidCommands.PLACE].toLowerCase()
-                // Validate arguments
-                const reg = new RegExp(`${commandString} [0-${this.tableSize}], [0-${this.tableSize}], north|south|east|west`)
-                if (reg.test(command)) {
+            const commandString: string = command.toLowerCase()
+            if (commandString.includes(ValidCommands[ValidCommands.PLACE].toLowerCase())) {
+                const placeString = ValidCommands[ValidCommands.PLACE].toLowerCase()
+                // Validating arguments - convert to lowercase to handle upper and lowercase input
+                const reg = new RegExp(`${placeString} [0-${this.tableSize}], [0-${this.tableSize}], north|south|east|west`)
+                if (reg.test(commandString)) {
                     return { 
                         validCommand: Object.keys(ValidCommands).find(key => key == ValidCommands[ValidCommands.PLACE]),
-                        args: command.replace(commandString, '').split(',')
+                        args: commandString.replace(placeString, '').split(',')
                      }
                 }
                 else {

@@ -21,7 +21,7 @@ describe('Robot tests', () => {
 
     describe('When using the PLACE X, Y, F command', () => {
         it('When a valid position is entered, the robot will be moved', () => {
-            mockRobot.move(1, 2, Bearing.NORTH)
+            mockRobot.place(1, 2, 'NORTH')
 
             expect(mockRobot.x).toBe(1)
             expect(mockRobot.y).toBe(2)
@@ -30,7 +30,7 @@ describe('Robot tests', () => {
 
         it('When an invalid position is entered, the robot does not move', () => {
             console.log = jest.fn()
-            mockRobot.move(4, 5, Bearing.WEST)
+            mockRobot.place(4, 5, 'south')
 
             expect(mockRobot.x).toBe(0)
             expect(mockRobot.y).toBe(0)
@@ -60,7 +60,7 @@ describe('Robot tests', () => {
 
         it('When trying to move out of max bounds, does not move', () => {
             console.log = jest.fn()
-            mockRobot.move(4, 4, Bearing.SOUTH)
+            mockRobot.place(4, 4, 'south')
             mockRobot.move()
 
             expect(mockRobot.x).toBe(4)
@@ -110,7 +110,7 @@ describe('Robot tests', () => {
 
         it('prints out the correct position after moving the robot', () => {
             console.log = jest.fn()
-            mockRobot.move(1, 3, Bearing.WEST)
+            mockRobot.place(1, 3, 'WEST')
             mockRobot.report()
 
             expect(console.log).toHaveBeenCalledWith("[1, 3], WEST\n")

@@ -17,10 +17,10 @@ export default class GameTable extends EventEmitter {
     processCommand(command: ValidCommands, args: string[]) {
         switch (command) {
             case ValidCommands.PLACE:
-                this.robot.move(
+                this.robot.place(
                     parseInt(args[0]), 
                     parseInt(args[1]), 
-                    parseInt(args[2]), 
+                    args[2], 
                 )
                 break
             case ValidCommands.MOVE:
