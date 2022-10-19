@@ -9,7 +9,7 @@ export default class Robot {
     public bearing: Bearing = Bearing.SOUTH
 
     private get directionToMove(): [number, number] {
-        return directionBindings[Bearing[this.bearing].toUpperCase()]
+        return directionBindings[Bearing[this.bearing]]
     }
 
     constructor(public table: GameTable) {
