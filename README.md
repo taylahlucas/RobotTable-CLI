@@ -14,8 +14,8 @@ COMMANDS: <br />
 # Setup
 
 cd robot-table-cli<br />
-npm install<br />
-ts-node index.ts<br />
+npm run build<br />
+npm run start<br />
 
 # Running Tests
 
