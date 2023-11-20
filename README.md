@@ -11,6 +11,8 @@ COMMANDS: <br />
     - LEFT/RIGHT: Rotate the robot 90 degrees either LEFT or RIGHT, <br />
     - REPORT: Show the current positino of the robot,  <br />
 
+https://github.com/taylahlucas/RobotTable-CLI/assets/53559103/89e1df35-744e-474f-8001-2ba02bfecc2d
+
 # Setup
 
 cd robot-table-cli<br />
